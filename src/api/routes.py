@@ -52,6 +52,7 @@ def login():
     user_email = data.get("user_email", None)
     password = data.get("password", None)
     user = User.query.filter_by(user_email=user_email, password=password).first()
+   
     if not user:
         return jsonify({"msg": "Bad username or password"}), 401
     access_token = create_access_token(identity=user.id)
