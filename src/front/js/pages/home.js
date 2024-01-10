@@ -12,9 +12,9 @@ export const Home = () => {
 				<h1 className="card-title">Stories are wild creatures</h1>
 				<p className="card-text"> ..be part of the story-making</p>
 				<div className="buttons text-center">
-					<a href="#" className="button btn btn-primary me-2">Signup
+					<a href="https://reimagined-couscous-v6vqp69959r73pp5q-3000.app.github.dev/signup" className="button btn btn-primary me-2">Signup
 						<i className="fa-solid fa-pen-to-square ms-2"></i> </a>
-					<a href="#" className="button btn btn-primary me-2">Login
+					<a href="https://reimagined-couscous-v6vqp69959r73pp5q-3000.app.github.dev/login" className="button btn btn-primary me-2">Login
 						<i className="fa-solid fa-right-to-bracket ms-2"></i></a>
 				</div>
 			</div>
