@@ -33,12 +33,13 @@ def getUsers():
 
 @api.route("/signup", methods=["POST"])
 def sign_up ():
-    data = request.json
-    user_email = request.json.get("user_email", None)
+    data = request.json 
+    print (data)
+    user_email = request.json.get("email", None)
     password = request.json.get("password", None)
     print (user_email, password)
 
-    if "user_email" not in data or "password" not in data:
+    if "email" not in data or "password" not in data:
         return jsonify({"error": "User email and password are required"}), 400
     new_user = User(email=user_email, password=password, is_active=True)
     db.session.add(new_user)
@@ -49,9 +50,9 @@ def sign_up ():
 @api.route("/login", methods=["POST"])
 def login():
     data = request.json
-    user_email = data.get("user_email", None)
+    user_email = data.get("email", None)
     password = data.get("password", None)
-    user = User.query.filter_by(user_email=user_email, password=password).first()
+    user = User.query.filter_by(email=user_email, password=password).first()
    
     if not user:
         return jsonify({"msg": "Bad username or password"}), 401
@@ -62,9 +63,11 @@ def login():
 @jwt_required()
 def private():
     id = get_jwt_identity ()
-    if id :
+    if id is not None:
         user = User.query.get(id) 
-        return jsonify({"data":user.serialize()}) 
-    else : 
-        return jsonify (False)
-    
+        if user: 
+            return jsonify({"data": user.serialize()}), 200
+        else: 
+            return jsonify({"error": "User not found"}), 404
+    else:
+        return jsonify({"error": "Unauthorized"}), 401

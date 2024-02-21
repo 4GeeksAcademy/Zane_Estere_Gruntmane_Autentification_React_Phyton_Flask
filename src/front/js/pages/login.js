@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 export const Login = () => {
@@ -9,9 +8,10 @@ export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const login = () => {
+	const login = (e) => {
+		e.preventDefault();
 		actions.loginUser({
-			user_email,
+			email,
 			password
 		})
 	}
@@ -30,7 +30,7 @@ export const Login = () => {
 					<input type="password" className="form-control" id="exampleInputPassword1" placeholder="your password" onChange={(e) => setPassword(e.target.value)} />
 				</div>
 
-				<button type="submit" className="button btn btn-primary col-8" onClick={login}>Login</button>
+				<button type="submit" className="button btn btn-primary col-8" onClick={e => login(e)}>Login</button>
 			</form>
 
 		</div>
